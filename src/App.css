@@ -1,38 +1,95 @@
 .App {
-  text-align: center;
+    margin: 1em;
+    height: 96vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.builder-wrapper {
+    height: 99%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.action-area {
+    border: 1px solid black;
+    height: 93%;
+    box-sizing: border-box;
+    padding: 1em;
+    display: flex;
+    gap: 1.5%;
+    align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.builder-box {
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 2% 4% 1%;
+    height: 98%;
+    width: 200%;
+    overflow: auto;
+    border-left: 1px solid;
 }
 
-.App-link {
-  color: #61dafb;
+.result-box {
+    box-sizing: border-box;
+    height: 98%;
+    width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.result-box textarea {
+    resize: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.condition-box{
+    display: flex;
+    gap: 10px;
+    margin-left: 50px;
+    margin-top: 0;
+    width: 70%;
+}
+
+.condition-list{
+    list-style-type: none;
+    border-left: 1px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-left: 10px;
+}
+
+.linebar{
+    border-top: 1px solid;
+    position: relative;
+    top: 15px;
+    margin-left: -40px;
+    width: 10%;
+}
+
+.operator-dropdown{
+    margin-left: -75px;
+}
+
+.add-condition Button{
+    width: 75px;
+    margin: 0.5em 0 0.5em -28px;
+}
+
+.add-condition-btn{
+    margin: 11px -20px;
+}
+
+
+.add-condition-enabled{
+    margin-left: -26px;
+}
+
+.nexted-builder{
+    margin-left: 6.5%;
+}
+
+.add-condition-enabled-nested{
+    margin-left: -55px;
 }

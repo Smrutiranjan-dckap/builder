@@ -1,0 +1,18 @@
+{
+    "source": {
+        "id": 1,
+        "value": "sample",
+        "custom_url": {
+            "url": "/3m-8233-n100-particulate-dust-mask-with-cool-flow-exhalation-valve-1-each/",
+            "is_customized": false
+        },
+        "keys": [
+            1,
+            2,
+            3,
+            4
+        ]
+    },
+    "status": "200",
+    "success": true
+}
