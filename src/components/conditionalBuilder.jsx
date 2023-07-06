@@ -13,6 +13,7 @@ function ConditionalBuilder(props) {
     addConditionEnabled,
     handleAddNewFieldName,
   } = props;
+
   return (
     <div className='builder-wrapper'>
       <h1>Conditional Builder</h1>
@@ -31,11 +32,14 @@ function ConditionalBuilder(props) {
           <div className={!addConditionEnabled ? 'add-condition' : 'add-condition-btn'}>
             {
               addConditionEnabled
-                ? <Radio.Group onChange={(e) => { handleAddCondition([conditions.length], e.target.value) }}>
-                  <Radio.Button value="and">AND</Radio.Button>
-                  <Radio.Button value="or">OR</Radio.Button>
-                  <Radio.Button value="nested">Nested</Radio.Button>
-                </Radio.Group>
+                ? <div>
+                  <Radio.Group onChange={(e) => { handleAddCondition([conditions.length], e.target.value) }}>
+                    <Radio.Button value="and">AND</Radio.Button>
+                    <Radio.Button value="or">OR</Radio.Button>
+                    <Radio.Button value="nested">Nested</Radio.Button>
+                  </Radio.Group>
+                  <Button onClick={() => { toggle() }} >*</Button>
+                </div>
                 : <Button onClick={() => { toggle() }} >+</Button>
             }
           </div>
@@ -49,8 +53,8 @@ function ConditionalBuilder(props) {
 };
 
 const TreeView = (props) => {
-  const [state,setState] = useState({
-    addConditonBtnEnabled : false,
+  const [state, setState] = useState({
+    addConditionEnabled: false,
   })
 
   const {
@@ -75,6 +79,7 @@ const TreeView = (props) => {
       {data.map((item, idx) => (
         <TreeNode
           key={idx}
+          data={data}
           node={item}
           state={state}
           toggle={toggle}
@@ -93,6 +98,7 @@ const TreeView = (props) => {
 const TreeNode = (props) => {
   const {
     node,
+    data,
     state,
     toggle,
     indices,
@@ -109,6 +115,7 @@ const TreeNode = (props) => {
           <div className="linebar"></div>
           <ConditionBox
             node={node}
+            data={data}
             indices={indices}
             allFields={allFields}
             handleDelete={handleDelete}
@@ -149,15 +156,18 @@ const TreeNode = (props) => {
             <div className={!state.addConditionEnabled ? 'add-condition' : 'add-condition-btn'}>
               {
                 state.addConditionEnabled
-                  ? <Radio.Group
-                    onChange={(e) => {
-                      toggle()
-                      handleAddCondition([...indices, node.length], e.target.value)
-                    }}>
-                    <Radio.Button value="and">AND</Radio.Button>
-                    <Radio.Button value="or">OR</Radio.Button>
-                    <Radio.Button value="nested">Nested</Radio.Button>
-                  </Radio.Group>
+                  ? <div>
+                    <Radio.Group
+                      onChange={(e) => {
+                        toggle()
+                        handleAddCondition([...indices, node.length], e.target.value)
+                      }}>
+                      <Radio.Button value="and">AND</Radio.Button>
+                      <Radio.Button value="or">OR</Radio.Button>
+                      <Radio.Button value="nested">Nested</Radio.Button>
+                    </Radio.Group>
+                    <Button onClick={() => { toggle() }} >*</Button>
+                  </div>
                   : <Button onClick={() => { toggle() }} >+</Button>
               }
             </div>

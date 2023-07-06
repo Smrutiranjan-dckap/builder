@@ -4,11 +4,11 @@ import { TreeSelect, Select, Input, Button } from "antd";
 function ConditionBox(props) {
   const {
     node,
+    data,
     indices,
     allFields,
     handleChange,
     handleDelete,
-    handleAddNewFieldName,
   } = props;
 
   const ifConditionOptions = {
@@ -27,6 +27,7 @@ function ConditionBox(props) {
     boolean: "Boolean"
   };
 
+  // To search that the key name
   const searchKeyInNestedObject = (obj, keyName) => {
     for (let key in obj) {
       if (key === keyName) {
@@ -42,7 +43,8 @@ function ConditionBox(props) {
 
     return false;
   };
-
+  
+  // tree Select
   const renderTreeNode = (data, parentKey = null) => {
     return Object.entries(data).map(([key, value]) => {
       if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
@@ -101,9 +103,12 @@ function ConditionBox(props) {
       </Select>
 
       {/* Delete Button */}
-      <Button
-        onClick={() => {handleDelete(indices) }}
-        type="primary">D</Button>
+      <div>
+        <Button
+          disabled={indices.length == 1 && indices[0] == 0 && data.length < 3}
+          onClick={() => { handleDelete(indices) }}
+          type="primary">D</Button>
+      </div>
     </div>
   )
 }

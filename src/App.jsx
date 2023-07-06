@@ -51,15 +51,6 @@ function App() {
     });
   }, []);
 
-  const handleAddNewFieldName = (key) => {
-    let allFields = state.allFields;
-    allFields[key] = "";
-    setState({
-      ...state,
-      allFields
-    })
-  };
-
   const handleAddCondition = (indices, value, condition = state.conditions) => {
     if (indices.length === 1) {
       // Inserting Conditions
@@ -118,16 +109,27 @@ function App() {
     })
   };
 
+  // to delete the condition
   const handleDelete = (indices, condition = state.conditions) => {
+    // deleting the condition with its operator
     if (indices.length === 1) {
-      condition.splice(indices[0] - 1, 2);
+      if (indices[0] > 1) {
+        condition.splice(indices[0] - 1, 2);
+      } else if (indices[0] < 1) {
+        condition.splice(0, 2);
+      }
     }
 
     const index = indices[0];
     const remainingIndices = indices.slice(1);
 
     if (Array.isArray(condition[index])) {
-      handleDelete(remainingIndices, condition[index]); // Recursively call the function for nested arrays
+      // if no child after deletion then delete the child and operator 
+      if (condition[index].length === 1) {
+        condition.splice(indices[0] - 1, 2)
+      } else {
+        handleDelete(remainingIndices, condition[index]); // Recursively call the function for nested arrays
+      }
     }
 
     setState({
@@ -136,6 +138,7 @@ function App() {
     })
   };
   
+  // For toggling the parent add condition button
   const toggle = () => {
     setState({
       ...state,
@@ -152,7 +155,6 @@ function App() {
         handleDelete={handleDelete}
         conditions={state.conditions}
         handleAddCondition={handleAddCondition}
-        handleAddNewFieldName={handleAddNewFieldName}
         addConditionEnabled={state.addConditionEnabled}
       />
     </div>
